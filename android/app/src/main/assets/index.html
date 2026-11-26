@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#112b35">
+  <meta name="description" content="A free, local-first UTME study room for two learners aiming for 320+ and LASU.">
+  <title>320+ Study Room — 2027 UTME</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="refinements.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Main navigation">
+      <a class="brand" href="#home" aria-label="320+ Study Room home">
+        <span class="brand-mark">32<span>0</span></span>
+        <span class="brand-copy"><strong>STUDY ROOM</strong><small>2027 UTME · LASU</small></span>
+      </a>
+      <div class="side-section-label">YOUR PREP</div>
+      <nav class="main-nav">
+        <button class="nav-item active" data-view="home"><span class="nav-icon">⌂</span>Today</button>
+        <button class="nav-item" data-view="plan"><span class="nav-icon">▦</span>Study plan</button>
+        <button class="nav-item" data-view="tutor"><span class="nav-icon">✳</span>Ask tutor</button>
+        <button class="nav-item" data-view="partner"><span class="nav-icon">◎</span>Partner chat</button>
+        <button class="nav-item" data-view="mock"><span class="nav-icon">◷</span>CBT practice</button>
+        <button class="nav-item" data-view="progress"><span class="nav-icon">↗</span>Progress</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="device-note"><span class="live-dot"></span><div><strong>AI runs on this device</strong><small>Partner chat is direct</small></div></div>
+        <a class="syllabus-link" href="https://eligibility.jamb.gov.ng/" target="_blank" rel="noreferrer">Official JAMB IBASS ↗</a>
+        <a class="syllabus-link" href="https://github.com/edenagbonsaint-gif/utme-study-room-2027/releases/latest/download/320-plus-study-room.apk" target="_blank" rel="noreferrer">Download Android app ↗</a>
+        <div class="sidebar-foot">Built for two focused learners.<br>Keep your room private.</div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div class="mobile-brand"><span class="brand-mark">32<span>0</span></span><strong>STUDY ROOM</strong></div>
+        <div class="topbar-date" id="todayDate">Your UTME study room</div>
+        <label class="learner-picker"><span>TRACK</span><select id="learnerSelect" aria-label="Choose learner track"><option value="law">Law track</option><option value="accounting">Accounting track</option></select></label>
+      </header>
+
+      <section class="view active" id="view-home">
+        <div class="hero-card">
+          <div class="hero-copy">
+            <div class="eyebrow light"><span class="eyebrow-line"></span> YOUR NEXT CHAPTER STARTS HERE</div>
+            <h1>Big goals.<br><em>One drill at a time.</em></h1>
+            <p>Two learners, one steady plan. Build the knowledge, practise under time, and keep moving toward LASU.</p>
+            <div class="hero-actions"><button class="button button-cream" data-goto="plan">Open today’s drill <span>→</span></button><span class="goal-pill">🎯 Aim: 320+</span></div>
+          </div>
+          <div class="hero-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="book-shape"><div class="book-page left-page"></div><div class="book-page right-page"></div></div><div class="star star-a">✳</div><div class="star star-b">✦</div><div class="art-caption">SHOW UP<br>AGAIN TOMORROW</div></div>
+          <div class="hero-footer"><span><i class="live-dot"></i> PREP WINDOW</span><strong>30 NOV 2026 <b>—</b> 28 FEB 2027</strong><span id="heroSessionTime">9:00–11:00 PM · LAGOS TIME</span></div>
+        </div>
+
+        <div class="section-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> YOUR DASHBOARD</div><h2>Today, at a glance</h2></div><span class="week-chip" id="weekChip">PREP STARTS SOON</span></div>
+        <div class="stats-grid">
+          <article class="stat-card"><div class="stat-top"><span>PLAN COMPLETE</span><span class="stat-symbol teal">◷</span></div><div class="stat-value"><strong id="planPercent">0%</strong><span id="planDays">0 / 91 drills</span></div><div class="progress-track"><div class="progress-fill teal-fill" id="planBar"></div></div><small>One finished drill moves you forward.</small></article>
+          <article class="stat-card"><div class="stat-top"><span>RECENT QUIZ ACCURACY</span><span class="stat-symbol coral">✳</span></div><div class="stat-value"><strong id="accuracyValue">—</strong><span>based on your answers</span></div><div class="progress-track"><div class="progress-fill coral-fill" id="accuracyBar"></div></div><small>Scores update after you answer.</small></article>
+          <article class="stat-card goal-card"><div class="stat-top"><span>YOUR REASON</span><span class="stat-symbol gold">✦</span></div><div class="goal-value" id="goalText">LASU Law</div><div class="goal-sub">320+ is built one question at a time.</div><button class="text-button" data-goto="progress">See your progress ↗</button></article>
+        </div>
+
+        <div class="today-grid">
+          <article class="panel session-panel">
+            <div class="panel-head"><div><div class="eyebrow"><span class="eyebrow-line"></span> TONIGHT’S SESSION</div><h3 id="sessionTitle">Your first drill is getting ready</h3></div><span class="tag tag-teal" id="sessionTag">2 HOURS</span></div>
+            <p class="panel-intro" id="sessionSubtitle">Starting Monday, November 30. Your first hour is shared; the second hour follows your track.</p>
+            <div class="session-preferences">
+              <label><span>SESSION LENGTH</span><select id="sessionDuration"><option value="60">1 hour</option><option value="120" selected>2 hours</option></select></label>
+              <label><span>START TIME · LAGOS</span><input id="sessionStartTime" type="time" value="21:00"></label>
+            <small id="sessionPlanHint">Two-hour sessions include 30 minutes each for shared English and Government, then one subject from your track.</small>
+            </div>
+            <div class="timeline">
+              <div class="timeline-row" id="sharedSessionRow"><span class="time-label" id="sharedTimeLabel">9:00–10:00 PM</span><span class="timeline-dot shared"></span><div><strong id="sharedSessionTitle">Learn together</strong><small id="sharedSubjects">Use of English + Government</small></div><span class="session-state" id="sharedSessionTag">SHARED</span></div>
+              <div class="timeline-row" id="trackSessionRow"><span class="time-label" id="trackTimeLabel">10:00–11:00 PM</span><span class="timeline-dot solo"></span><div><strong id="trackSessionTitle">Your track lesson</strong><small id="trackSubjects">CRS</small></div><span class="session-state solo-label">YOUR TRACK</span></div>
+            </div>
+            <div class="session-controls"><div class="countdown" id="countdown">Your 91-day plan is ready.</div><div class="session-buttons"><button class="button button-primary" id="startDrill">Start tonight’s drill <span>→</span></button><button class="button button-complete" id="completeDrill" hidden>Mark drill complete ✓</button></div></div>
+          </article>
+          <article class="panel topic-panel">
+            <div class="panel-head"><div><div class="eyebrow"><span class="eyebrow-line"></span> TOPIC PATH</div><h3>Keep the syllabus in sight</h3></div><span class="topic-count" id="topicCount">0 / 0</span></div>
+            <p class="panel-intro">Tap a topic as you master it. Your checklist stays on this device.</p>
+            <div class="topic-list" id="topicList"></div>
+            <button class="text-button" data-goto="plan">View the full study plan →</button>
+          </article>
+        </div>
+        <div class="goal-strip"><span class="goal-icon">✦</span><div><strong id="goalReminder">Keep your reason close.</strong><small>Small, focused practice every day moves you toward your course and LASU.</small></div><span class="goal-score">320<span>+</span></span></div>
+      </section>
+
+      <section class="view" id="view-plan">
+        <div class="page-heading"><div class="eyebrow"><span class="eyebrow-line"></span> NOV 30 — FEB 28</div><h1>Your 91-day <em>study path</em></h1><p>Choose one or two hours and set a start time on Today. Your daily topics adjust to fit.</p></div>
+        <div class="plan-banner"><div><strong id="planSessionRange">9:00–11:00 PM · Africa/Lagos</strong><span id="planSessionStructure">Hour 1: 30 minutes each for shared English and Government · Hour 2: one subject from your track</span></div><span class="banner-icon">◷</span></div>
+        <div class="plan-legend"><span><i class="legend-dot shared"></i> Shared session</span><span><i class="legend-dot solo"></i> Separate track</span><span><i class="legend-dot review"></i> Review / CBT</span></div>
+        <div class="week-list" id="weekList"></div>
+        <div class="note-box"><strong>About the syllabus</strong><p>This plan follows the current JAMB IBASS subject outlines. Check the official IBASS page before registration and again when JAMB publishes 2027 updates. Questions in this site are original practice questions, not claimed past questions.</p><a href="https://eligibility.jamb.gov.ng/" target="_blank" rel="noreferrer">Open official JAMB IBASS ↗</a></div>
+      </section>
+
+      <section class="view" id="view-tutor">
+        <div class="page-heading tutor-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> YOUR ON-DEVICE TUTOR</div><h1>Ask. Practise. <em>Understand.</em></h1><p>The AI tutor runs on this device. Use Partner chat to talk directly with your study partner while you study.</p></div><div class="model-badge" id="modelBadge"><span class="model-dot"></span><span id="modelStatus">Tutor not loaded</span></div></div>
+        <div class="tutor-layout">
+          <aside class="tutor-setup panel">
+            <div class="eyebrow"><span class="eyebrow-line"></span> GET READY</div>
+            <h3>Load your free tutor</h3>
+            <p>Pick a small local model. The first download uses internet data and may take a while. After it loads, responses are generated on your device.</p>
+            <label class="field-label" for="modelSelect">MODEL SIZE</label>
+            <select id="modelSelect" class="model-select"><option value="Qwen2.5-0.5B-Instruct-q4f16_1-MLC">Lite · about 945 MB · lower memory</option><option value="Qwen2.5-1.5B-Instruct-q4f16_1-MLC">Standard · about 1.6 GB · stronger answers</option></select>
+            <button class="button button-primary full-width" id="loadModel">Load on this device <span>↓</span></button>
+            <div class="load-progress" id="loadProgressWrap" hidden><div class="progress-track"><div class="progress-fill teal-fill" id="loadProgressBar"></div></div><small id="loadProgressText">Preparing…</small></div>
+            <div class="device-warning" id="deviceWarning" hidden></div>
+            <div class="privacy-note"><span>⌂</span><p><strong>Private by design</strong><br>No API key, account, or paid AI call. Each device has its own tutor chat and progress.</p></div>
+            <button class="text-button clear-button" id="clearChat">Clear this device’s tutor chat</button>
+          </aside>
+          <section class="panel chat-panel" aria-label="Tutor conversation">
+            <div class="chat-header"><div class="tutor-avatar">✳</div><div><strong>Study Coach</strong><small id="chatSubject">Ready when you are</small></div><button class="chat-subject-button" id="chatSubjectButton">Choose subject ▾</button></div>
+            <div class="subject-choices" id="subjectChoices" hidden></div>
+            <div class="chat-messages" id="chatMessages" aria-live="polite"></div>
+            <div class="prompt-chips"><button data-prompt="Teach me the topic I should study tonight in simple steps. Ask me one question at a time.">Teach tonight’s topic</button><button data-prompt="Give me five original JAMB-style practice questions for this subject. Ask them one at a time and wait for my answer.">Give me a 5-question drill</button><button data-prompt="Explain this topic in the simplest way, then give one worked example and one question for me to try.">Explain simply</button></div>
+            <form class="chat-form" id="chatForm"><textarea id="chatInput" rows="1" placeholder="Ask about a topic, question, or mistake…" aria-label="Message your tutor" disabled></textarea><button class="send-button" id="sendMessage" type="submit" disabled aria-label="Send message">↑</button></form>
+            <div class="chat-footnote">Answers come from a small on-device model. Verify syllabus details with official JAMB sources.</div>
+          </section>
+        </div>
+      </section>
+
+      <section class="view" id="view-partner">
+        <div class="page-heading"><div class="eyebrow"><span class="eyebrow-line"></span> YOUR STUDY PARTNER</div><h1>Talk it through <em>together.</em></h1><p>Open a direct chat room, share its invite code with your partner, and discuss the lesson while each of you uses your own AI tutor.</p></div>
+        <div class="partner-layout">
+          <aside class="panel partner-setup">
+            <div class="eyebrow"><span class="eyebrow-line"></span> CONNECT</div>
+            <h3>Start or join your room</h3>
+            <label class="partner-field" for="partnerName">YOUR NICKNAME<input id="partnerName" maxlength="24" placeholder="For example, Law learner" autocomplete="nickname"></label>
+            <button class="button button-primary full-width" id="createPartnerRoom">Create a room <span>↗</span></button>
+            <div class="invite-box" id="inviteBox" hidden>
+              <label class="partner-field" for="partnerInviteCode">ROOM INVITE CODE<input id="partnerInviteCode" readonly></label>
+              <button class="button button-copy full-width" id="copyPartnerCode">Copy invite code</button>
+            </div>
+            <div class="room-divider"><span>OR JOIN YOUR PARTNER</span></div>
+            <label class="partner-field" for="joinPartnerCode">PARTNER’S INVITE CODE<input id="joinPartnerCode" maxlength="100" placeholder="Paste their code here" autocomplete="off"></label>
+            <button class="button button-secondary full-width" id="joinPartnerRoom">Join room</button>
+            <button class="text-button leave-room" id="leavePartnerRoom" hidden>Leave room</button>
+            <div class="partner-status" id="partnerStatus" role="status" aria-live="polite">Not connected yet.</div>
+            <div class="privacy-note partner-privacy"><span>⌂</span><p><strong>Private direct chat</strong><br>Messages travel between your two browsers and are not saved by this site. The free connection service helps the browsers meet. Anyone with your invite code may try to join, so share it only with your partner. Use nicknames; don’t post personal details.</p></div>
+          </aside>
+          <section class="panel partner-chat-panel" aria-label="Chat with your study partner">
+            <div class="partner-chat-header"><div class="tutor-avatar">◎</div><div><strong>Study partner chat</strong><small id="partnerChatState">Waiting for a connection</small></div></div>
+            <div class="partner-messages" id="partnerMessages" aria-live="polite"><div class="partner-empty"><strong>Your shared room starts here</strong><span>Create a room, then send the invite code to your partner. Both of you must keep this page open.</span></div></div>
+            <form class="chat-form partner-chat-form" id="partnerChatForm"><textarea id="partnerChatInput" rows="1" maxlength="1000" placeholder="Connect to your partner before chatting…" aria-label="Message your study partner" disabled></textarea><button class="send-button" id="sendPartnerMessage" type="submit" disabled aria-label="Send message">↑</button></form>
+            <div class="chat-footnote">Your AI tutor and partner chat are separate. Messages disappear when you leave or reload the room.</div>
+          </section>
+        </div>
+      </section>
+
+      <section class="view" id="view-mock">
+        <div class="page-heading"><div class="eyebrow"><span class="eyebrow-line"></span> CBT PRACTICE</div><h1>Practice under <em>time.</em></h1><p>Try original UTME-style questions. The answers and explanations appear after each question.</p></div>
+        <div class="mock-layout"><section class="panel mock-main"><div class="mock-top"><div><div class="eyebrow"><span class="eyebrow-line"></span> QUICK CHECK</div><h3 id="quizTitle">Choose a subject to begin</h3></div><label class="field-label">SUBJECT<select id="quizSubject" class="model-select"></select></label></div><div class="quiz-stage" id="quizStage"><div class="empty-quiz"><span>✳</span><strong>Your practice set is ready</strong><small>Choose a subject, then begin. Questions are original practice items.</small><button class="button button-primary" id="beginQuiz">Begin 5-question quiz →</button></div></div></section><aside class="panel mock-side"><div class="eyebrow"><span class="eyebrow-line"></span> EXAM HABIT</div><h3>Think before you tap.</h3><p>Read the full question, predict the answer, then choose. If you miss it, understand why before moving on.</p><div class="mock-rule"><span>01</span><div><strong>Read carefully</strong><small>Notice key words and units.</small></div></div><div class="mock-rule"><span>02</span><div><strong>Use your time</strong><small>Skip and return if stuck.</small></div></div><div class="mock-rule"><span>03</span><div><strong>Learn from mistakes</strong><small>Accuracy grows with review.</small></div></div></aside></div>
+      </section>
+
+      <section class="view" id="view-progress">
+        <div class="page-heading"><div class="eyebrow"><span class="eyebrow-line"></span> YOUR WORK, MADE VISIBLE</div><h1>Progress is <em>proof.</em></h1><p>Your results are saved locally in this browser. Switch tracks to view the other learner’s data on this device.</p></div>
+        <div class="progress-hero panel"><div><div class="eyebrow"><span class="eyebrow-line"></span> TOWARD YOUR 320+ GOAL</div><h2 id="progressGoal">LASU Law</h2><p id="progressCopy">Every completed drill adds to your plan.</p><button class="button button-primary" data-goto="plan">Continue your plan →</button></div><div class="progress-ring" id="progressRing"><div><strong id="bigProgress">0%</strong><small>plan covered</small></div></div></div>
+        <div class="stats-grid progress-stats"><article class="stat-card"><div class="stat-top"><span>DRILLS COMPLETED</span><span class="stat-symbol teal">◷</span></div><div class="stat-value"><strong id="progressDrills">0</strong><span>of 91 planned</span></div><div class="progress-track"><div class="progress-fill teal-fill" id="progressDrillsBar"></div></div></article><article class="stat-card"><div class="stat-top"><span>QUESTIONS ANSWERED</span><span class="stat-symbol coral">✳</span></div><div class="stat-value"><strong id="progressQuestions">0</strong><span>keep practising</span></div><div class="progress-track"><div class="progress-fill coral-fill" id="progressQuestionsBar"></div></div></article><article class="stat-card"><div class="stat-top"><span>TOPICS CHECKED OFF</span><span class="stat-symbol gold">✓</span></div><div class="stat-value"><strong id="progressTopics">0</strong><span id="progressTopicsTotal">of 0 topics</span></div><div class="progress-track"><div class="progress-fill gold-fill" id="progressTopicsBar"></div></div></article></div>
+        <div class="panel score-panel"><div class="panel-head"><div><div class="eyebrow"><span class="eyebrow-line"></span> ACCURACY BY SUBJECT</div><h3>Keep your footing</h3></div><span class="score-caption">From your CBT practice</span></div><div id="subjectScores" class="subject-scores"></div></div>
+        <button class="text-button reset-progress" id="resetProgress">Reset progress for this track</button>
+      </section>
+
+      <footer class="site-footer"><span>320+ STUDY ROOM</span><span>Made for steady effort · Questions in this app are practice questions, not official JAMB past questions.</span></footer>
+    </main>
+  </div>
+</body>
+</html>
+

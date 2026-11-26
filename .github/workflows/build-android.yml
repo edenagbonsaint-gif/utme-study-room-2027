@@ -1,0 +1,65 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'android/**'
+      - '.github/workflows/build-android.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the study room
+        uses: actions/checkout@v6
+
+      - name: Set up Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v4
+        with:
+          packages: 'platform-tools platforms;android-35 build-tools;35.0.0'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
+        with:
+          gradle-version: '8.9'
+
+      - name: Build installable APK
+        working-directory: android
+        run: gradle --no-daemon assembleDebug
+
+      - name: Give the APK a simple download name
+        run: cp android/app/build/outputs/apk/debug/app-debug.apk android/app/build/outputs/apk/debug/320-plus-study-room.apk
+
+      - name: Keep a downloadable build artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: 320-plus-study-room-android
+          path: android/app/build/outputs/apk/debug/320-plus-study-room.apk
+          retention-days: 90
+
+      - name: Publish the APK download
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: android-v1.0.0
+          name: 320+ Study Room for Android
+          body: |
+            Install the APK on an Android phone. This is a free build of the 320+ Study Room.
+
+            The study pages are included in the app. Loading the AI tutor model and using partner chat require an internet connection. The AI model needs a compatible Android device and WebView.
+
+            This APK is signed with a debug key for direct installation. It is not a Google Play Store release.
+          files: android/app/build/outputs/apk/debug/320-plus-study-room.apk
+          fail_on_unmatched_files: true
+          make_latest: true
+

@@ -11,6 +11,10 @@ A free UTME study website for the two tracks. It has a flexible 91-day plan, top
 - The AI model is small and can make mistakes. Verify syllabus and admission details with JAMB's official IBASS.
 - The public version is hosted on GitHub Pages from the public repository. No paid hosting or AI service is used.
 
+## Android app
+
+Download the installable Android APK from the [latest public release](https://github.com/edenagbonsaint-gif/utme-study-room-2027/releases/latest/download/320-plus-study-room.apk). The app packages the study pages, schedule, and quizzes. The AI tutor and partner chat need internet access; tutor model support depends on the phone's Android System WebView and graphics hardware. This is a debug-signed APK for direct installation, not a Google Play release.
+
 ## Run locally
 
 The tutor requires a secure site address (HTTPS) or localhost. Do not open `index.html` directly from a `file://` address.

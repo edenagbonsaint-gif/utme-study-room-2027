@@ -22,11 +22,12 @@
         <button class="nav-item active" data-view="home"><span class="nav-icon">⌂</span>Today</button>
         <button class="nav-item" data-view="plan"><span class="nav-icon">▦</span>Study plan</button>
         <button class="nav-item" data-view="tutor"><span class="nav-icon">✳</span>Ask tutor</button>
+        <button class="nav-item" data-view="partner"><span class="nav-icon">◎</span>Partner chat</button>
         <button class="nav-item" data-view="mock"><span class="nav-icon">◷</span>CBT practice</button>
         <button class="nav-item" data-view="progress"><span class="nav-icon">↗</span>Progress</button>
       </nav>
       <div class="sidebar-bottom">
-        <div class="device-note"><span class="live-dot"></span><div><strong>Runs on this device</strong><small>No API key or account</small></div></div>
+        <div class="device-note"><span class="live-dot"></span><div><strong>AI runs on this device</strong><small>Partner chat is direct</small></div></div>
         <a class="syllabus-link" href="https://eligibility.jamb.gov.ng/" target="_blank" rel="noreferrer">Official JAMB IBASS ↗</a>
         <div class="sidebar-foot">Built for two focused learners.<br>Keep your room private.</div>
       </div>
@@ -48,7 +49,7 @@
             <div class="hero-actions"><button class="button button-cream" data-goto="plan">Open today’s drill <span>→</span></button><span class="goal-pill">🎯 Aim: 320+</span></div>
           </div>
           <div class="hero-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="book-shape"><div class="book-page left-page"></div><div class="book-page right-page"></div></div><div class="star star-a">✳</div><div class="star star-b">✦</div><div class="art-caption">SHOW UP<br>AGAIN TOMORROW</div></div>
-          <div class="hero-footer"><span><i class="live-dot"></i> PREP WINDOW</span><strong>30 NOV 2026 <b>—</b> 28 FEB 2027</strong><span>9:00–11:00 PM · LAGOS TIME</span></div>
+          <div class="hero-footer"><span><i class="live-dot"></i> PREP WINDOW</span><strong>30 NOV 2026 <b>—</b> 28 FEB 2027</strong><span id="heroSessionTime">9:00–11:00 PM · LAGOS TIME</span></div>
         </div>
 
         <div class="section-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> YOUR DASHBOARD</div><h2>Today, at a glance</h2></div><span class="week-chip" id="weekChip">PREP STARTS SOON</span></div>
@@ -62,9 +63,14 @@
           <article class="panel session-panel">
             <div class="panel-head"><div><div class="eyebrow"><span class="eyebrow-line"></span> TONIGHT’S SESSION</div><h3 id="sessionTitle">Your first drill is getting ready</h3></div><span class="tag tag-teal" id="sessionTag">2 HOURS</span></div>
             <p class="panel-intro" id="sessionSubtitle">Starting Monday, November 30. Your first hour is shared; the second hour follows your track.</p>
+            <div class="session-preferences">
+              <label><span>SESSION LENGTH</span><select id="sessionDuration"><option value="60">1 hour</option><option value="120" selected>2 hours</option></select></label>
+              <label><span>START TIME · LAGOS</span><input id="sessionStartTime" type="time" value="21:00"></label>
+            <small id="sessionPlanHint">Two-hour sessions include 30 minutes each for shared English and Government, then one subject from your track.</small>
+            </div>
             <div class="timeline">
-              <div class="timeline-row"><span class="time-label">9:00–10:00</span><span class="timeline-dot shared"></span><div><strong>Learn together</strong><small>Use of English + Government</small></div><span class="session-state">SHARED</span></div>
-              <div class="timeline-row"><span class="time-label">10:00–11:00</span><span class="timeline-dot solo"></span><div><strong>Your track lesson</strong><small id="trackSubjects">CRS + Literature</small></div><span class="session-state solo-label">YOUR TRACK</span></div>
+              <div class="timeline-row" id="sharedSessionRow"><span class="time-label" id="sharedTimeLabel">9:00–10:00 PM</span><span class="timeline-dot shared"></span><div><strong id="sharedSessionTitle">Learn together</strong><small id="sharedSubjects">Use of English + Government</small></div><span class="session-state" id="sharedSessionTag">SHARED</span></div>
+              <div class="timeline-row" id="trackSessionRow"><span class="time-label" id="trackTimeLabel">10:00–11:00 PM</span><span class="timeline-dot solo"></span><div><strong id="trackSessionTitle">Your track lesson</strong><small id="trackSubjects">CRS</small></div><span class="session-state solo-label">YOUR TRACK</span></div>
             </div>
             <div class="session-controls"><div class="countdown" id="countdown">Your 91-day plan is ready.</div><div class="session-buttons"><button class="button button-primary" id="startDrill">Start tonight’s drill <span>→</span></button><button class="button button-complete" id="completeDrill" hidden>Mark drill complete ✓</button></div></div>
           </article>
@@ -79,15 +85,15 @@
       </section>
 
       <section class="view" id="view-plan">
-        <div class="page-heading"><div class="eyebrow"><span class="eyebrow-line"></span> NOV 30 — FEB 28</div><h1>Your 91-day <em>study path</em></h1><p>One two-hour drill each day. Learn the shared subjects together, then switch to your own track.</p></div>
-        <div class="plan-banner"><div><strong>9:00–11:00 PM · Africa/Lagos</strong><span>Hour 1: English + Government together · Hour 2: track subjects</span></div><span class="banner-icon">◷</span></div>
+        <div class="page-heading"><div class="eyebrow"><span class="eyebrow-line"></span> NOV 30 — FEB 28</div><h1>Your 91-day <em>study path</em></h1><p>Choose one or two hours and set a start time on Today. Your daily topics adjust to fit.</p></div>
+        <div class="plan-banner"><div><strong id="planSessionRange">9:00–11:00 PM · Africa/Lagos</strong><span id="planSessionStructure">Hour 1: 30 minutes each for shared English and Government · Hour 2: one subject from your track</span></div><span class="banner-icon">◷</span></div>
         <div class="plan-legend"><span><i class="legend-dot shared"></i> Shared session</span><span><i class="legend-dot solo"></i> Separate track</span><span><i class="legend-dot review"></i> Review / CBT</span></div>
         <div class="week-list" id="weekList"></div>
         <div class="note-box"><strong>About the syllabus</strong><p>This plan follows the current JAMB IBASS subject outlines. Check the official IBASS page before registration and again when JAMB publishes 2027 updates. Questions in this site are original practice questions, not claimed past questions.</p><a href="https://eligibility.jamb.gov.ng/" target="_blank" rel="noreferrer">Open official JAMB IBASS ↗</a></div>
       </section>
 
       <section class="view" id="view-tutor">
-        <div class="page-heading tutor-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> YOUR ON-DEVICE TUTOR</div><h1>Ask. Practise. <em>Understand.</em></h1><p>The model runs in this browser on this device. Chat and progress do not sync with your partner’s device, so open the same topic and discuss answers together.</p></div><div class="model-badge" id="modelBadge"><span class="model-dot"></span><span id="modelStatus">Tutor not loaded</span></div></div>
+        <div class="page-heading tutor-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> YOUR ON-DEVICE TUTOR</div><h1>Ask. Practise. <em>Understand.</em></h1><p>The AI tutor runs on this device. Use Partner chat to talk directly with your study partner while you study.</p></div><div class="model-badge" id="modelBadge"><span class="model-dot"></span><span id="modelStatus">Tutor not loaded</span></div></div>
         <div class="tutor-layout">
           <aside class="tutor-setup panel">
             <div class="eyebrow"><span class="eyebrow-line"></span> GET READY</div>
@@ -108,6 +114,34 @@
             <div class="prompt-chips"><button data-prompt="Teach me the topic I should study tonight in simple steps. Ask me one question at a time.">Teach tonight’s topic</button><button data-prompt="Give me five original JAMB-style practice questions for this subject. Ask them one at a time and wait for my answer.">Give me a 5-question drill</button><button data-prompt="Explain this topic in the simplest way, then give one worked example and one question for me to try.">Explain simply</button></div>
             <form class="chat-form" id="chatForm"><textarea id="chatInput" rows="1" placeholder="Ask about a topic, question, or mistake…" aria-label="Message your tutor" disabled></textarea><button class="send-button" id="sendMessage" type="submit" disabled aria-label="Send message">↑</button></form>
             <div class="chat-footnote">Answers come from a small on-device model. Verify syllabus details with official JAMB sources.</div>
+          </section>
+        </div>
+      </section>
+
+      <section class="view" id="view-partner">
+        <div class="page-heading"><div class="eyebrow"><span class="eyebrow-line"></span> YOUR STUDY PARTNER</div><h1>Talk it through <em>together.</em></h1><p>Open a direct chat room, share its invite code with your partner, and discuss the lesson while each of you uses your own AI tutor.</p></div>
+        <div class="partner-layout">
+          <aside class="panel partner-setup">
+            <div class="eyebrow"><span class="eyebrow-line"></span> CONNECT</div>
+            <h3>Start or join your room</h3>
+            <label class="partner-field" for="partnerName">YOUR NICKNAME<input id="partnerName" maxlength="24" placeholder="For example, Law learner" autocomplete="nickname"></label>
+            <button class="button button-primary full-width" id="createPartnerRoom">Create a room <span>↗</span></button>
+            <div class="invite-box" id="inviteBox" hidden>
+              <label class="partner-field" for="partnerInviteCode">ROOM INVITE CODE<input id="partnerInviteCode" readonly></label>
+              <button class="button button-copy full-width" id="copyPartnerCode">Copy invite code</button>
+            </div>
+            <div class="room-divider"><span>OR JOIN YOUR PARTNER</span></div>
+            <label class="partner-field" for="joinPartnerCode">PARTNER’S INVITE CODE<input id="joinPartnerCode" maxlength="100" placeholder="Paste their code here" autocomplete="off"></label>
+            <button class="button button-secondary full-width" id="joinPartnerRoom">Join room</button>
+            <button class="text-button leave-room" id="leavePartnerRoom" hidden>Leave room</button>
+            <div class="partner-status" id="partnerStatus" role="status" aria-live="polite">Not connected yet.</div>
+            <div class="privacy-note partner-privacy"><span>⌂</span><p><strong>Private direct chat</strong><br>Messages travel between your two browsers and are not saved by this site. The free connection service helps the browsers meet. Anyone with your invite code may try to join, so share it only with your partner. Use nicknames; don’t post personal details.</p></div>
+          </aside>
+          <section class="panel partner-chat-panel" aria-label="Chat with your study partner">
+            <div class="partner-chat-header"><div class="tutor-avatar">◎</div><div><strong>Study partner chat</strong><small id="partnerChatState">Waiting for a connection</small></div></div>
+            <div class="partner-messages" id="partnerMessages" aria-live="polite"><div class="partner-empty"><strong>Your shared room starts here</strong><span>Create a room, then send the invite code to your partner. Both of you must keep this page open.</span></div></div>
+            <form class="chat-form partner-chat-form" id="partnerChatForm"><textarea id="partnerChatInput" rows="1" maxlength="1000" placeholder="Connect to your partner before chatting…" aria-label="Message your study partner" disabled></textarea><button class="send-button" id="sendPartnerMessage" type="submit" disabled aria-label="Send message">↑</button></form>
+            <div class="chat-footnote">Your AI tutor and partner chat are separate. Messages disappear when you leave or reload the room.</div>
           </section>
         </div>
       </section>

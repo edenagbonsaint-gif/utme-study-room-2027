@@ -1,0 +1,6 @@
+[hidden]{display:none!important}
+.session-buttons{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.button-complete{background:#e2f1eb;color:#176f62}
+.button-complete:hover{background:#cce9dd}
+@media(max-width:760px){.session-buttons{width:100%}.session-buttons .button{flex:1}}
+
